@@ -12,3 +12,6 @@ Requirements:
 And just run main.py and you are good to go!
 
 in case if you don't know how to run a python file just run `python3 main.py` in your terminal.
+
+# Support
+TRON: `TDuL3FZVE1iz41TUW1J7sKWBNnNeavypxU`
