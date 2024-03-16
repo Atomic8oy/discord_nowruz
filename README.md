@@ -11,6 +11,4 @@ Requirements:
 
 And just run main.py and you are good to go!
 
-in case if you don'y know how to run a python file:<br>
-Windows: `python main.py`<br>
-Linux: `python3 main.py`
+in case if you don't know how to run a python file just run `python3 main.py` in your terminal.
