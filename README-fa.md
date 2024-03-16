@@ -1,7 +1,7 @@
 # Discord Nowruz Countdown
 یه شمارش معکوس توی قالب اکتیویتی دیسکورد
 
-<p align="center"><a href="#"> English </a></p>
+<p align="center"><a href="https://github.com/Atomic8oy/discord_nowruz/blob/main/README.md"> English </a></p>
 
 ## آموزش راه اندازی:
  پیش نیاز ها
