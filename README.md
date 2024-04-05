@@ -3,7 +3,7 @@ Nowruz Countdown in discord activity/Rich presence
 
 <p align="center"><a href="https://github.com/Atomic8oy/discord_nowruz/blob/main/README-fa.md"> فارسی </a></p>
 
-## Instalation Guide:
+## Installation Guide:
 Requirements:
 1. You need a discord client running in your machine (obviously)
 2. At least python v3.9 installed.
