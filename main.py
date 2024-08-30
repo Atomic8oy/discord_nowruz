@@ -1,6 +1,5 @@
 from discordrp import Presence
-from datetime import datetime
-from time import sleep
+from time import sleep, time
 
 
 CLIENT_ID = '1218599022688862288'
@@ -17,11 +16,11 @@ with Presence(CLIENT_ID) as presence:
     )
     print("Presence updated")
 
-    now = datetime.now().timestamp()
+    now = time()
 
     while now < NOWRUZ_UNIX:
         sleep(1)
-        now = datetime.now().timestamp()
+        now = time()
     
     presence.set(
             {
