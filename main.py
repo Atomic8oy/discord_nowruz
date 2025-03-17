@@ -1,37 +1,69 @@
-from discordrp import Presence
-from time import sleep, time
+from pypresence.presence import Presence
+from datetime import datetime
+from time import sleep
 
+CLIEND_ID = "1218599022688862288"
+NOWRUZ = datetime(2025, 3, 20, 12, 31, 30) # In case of changes (2025, 3, 20, 12, 31, 30)
+NOWRUZ_UNIX = int(NOWRUZ.timestamp())
 
-CLIENT_ID = '1218599022688862288'
-NOWRUZ_UNIX:int = 1710903986
+pres = Presence(CLIEND_ID)
 
-with Presence(CLIENT_ID) as presence:
-    print("CONNECTED")
-    presence.set(
-        {
-            "details": "Waiting for Nowruz...",
-            "timestamps": {"end": NOWRUZ_UNIX},
-            "assets" : {"large_image": "nowruz1403", "large_text": "Its not Nowruz yet!"}
-        }
-    )
-    print("Presence updated")
+pres.connect()
+print(NOWRUZ - datetime.now())
 
-    now = time()
-
-    while now < NOWRUZ_UNIX:
-        sleep(1)
-        now = time()
+while True:
+    remaining = NOWRUZ - datetime.now()
+    if remaining.days > 0:
+        timeout = 120
+        pres.update(
+            large_text="Waiting for Nowruz of 1404",
+            large_image="nowruz1404",
+            state=f"{remaining.days} days to Nowruz!",
+            end=NOWRUZ_UNIX,
+        )
+    elif remaining.days == 0 and remaining.seconds > 60*60:
+        rem = str(remaining).split(":")
+        pres.update(
+            large_text="Waiting for Nowruz of 1404",
+            large_image="nowruz1404",
+            state=f"{rem[0]}h and {rem[1]}m till Nowruz!",
+            end=NOWRUZ_UNIX,
+        )
+        timeout = 2
+    elif remaining.days == 0 and remaining.seconds > 120:
+        rem = str(remaining).split(":")
+        pres.update(
+            large_text="Waiting for Nowruz of 1404",
+            large_image="nowruz1404",
+            state=f"{int(rem[1])} minutes till Nowruz!",
+            end=NOWRUZ_UNIX,
+        )
+        timeout = 30
+    else:
+        pres.update(
+            large_image="nowruz1404",
+            state=f"{remaining.seconds} seconds till Nowruz!",
+            end=NOWRUZ_UNIX,
+        )
+        timeout = 1
     
-    presence.set(
-            {
-                "details": "Happy Nowruz!",
-                "timestamps": {"start": NOWRUZ_UNIX},
-                "assets" : {"large_image": "nowruz1403", "large_text": "Happy Nowruz!"}
-            }
-            )
-    print("Presence updated. HAPPY NOWRUZ!")
+    if remaining.seconds <= 0:
+        break
 
-    print("\nYou can close the app now btw...")
+    sleep(timeout)
 
+print("\nHappy Nowruz mate!\nWish you a better year ;)")
+print("\nYou can close the app now.")
+
+pres.update(
+    large_image='nowruz1404',
+    large_text='Nowruz of 1404',
+    state="Happy Nowruz!",
+    start=NOWRUZ_UNIX
+)
+
+try:
     while True:
-        sleep(30)
+        pass
+except KeyboardInterrupt:
+    quit()
